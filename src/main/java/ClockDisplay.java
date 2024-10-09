@@ -1,10 +1,16 @@
 
+package src.main.java;
+
+
 public class ClockDisplay
 {
+    
     //Implement 2 private NumberDisplay objects. 
     //  One for hours and one for minutes
     //Implement a private String for the display
-
+    private NumberDisplay hours; 
+    private NumberDisplay minutes; 
+    private String display; 
     //Implement a constructor that takes no parameters
     //The constructor should set hours as a NumberDisplay object with 24 as the limit
     //The constructor should set minutes as a NumberDisplay object with 60 as the limit
@@ -14,6 +20,39 @@ public class ClockDisplay
     //The constructor should set hours as a NumberDisplay object with 24 as the limit
     //The constructor should set minutes as a NumberDisplay object with 60 as the limit
     //The constructor should call the method setTime with the parameters passed in
+    public void updateDisplay() {
+        String newDisplay = " "; 
+        newDisplay=newDisplay + hours.getDisplayValue(); 
+        newDisplay+=":"; 
+        newDisplay=newDisplay + minutes.getDisplayValue(); 
+        display = newDisplay; 
+    }
+    public ClockDisplay() {
+        hours = new NumberDisplay(24); 
+        minutes = new NumberDisplay(60); 
+        updateDisplay(); 
+    }
+    public ClockDisplay(int hour, int minute) {
+        hours = new NumberDisplay(24); 
+        minutes = new NumberDisplay(60); 
+        setTime(hour, minute); 
+    }
+    public void timeTick() {
+        minutes.increment(); 
+        if (minutes.getDisplayValue().equals(0)) {
+            hours.increment();
+            }
+        updateDisplay(); 
+    }
+    public void setTime(int hour, int minute) {
+        hours.setValue(hour); 
+        minutes.setValue(minute); 
+        updateDisplay(); 
+        
+    }
+    public String getTime() {
+        return display; 
+    }
     
     //Implement a method timeTick that takes no parameters and returns nothing
     //The method should increase the minute value by one each run
